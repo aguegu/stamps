@@ -73,7 +73,7 @@ class StampsConfiguration(object):
             self.wsdl = urljoin("file:", pathname2url(wsdl))
 
         if self.port is None:
-            self.port = "SwsimV{0}Soap12".format(VERSION)
+            self.port = "Swsimv{0}Soap12".format(VERSION)
 
         assert self.integration_id
         assert self.username

@@ -3,3 +3,4 @@
 build
 dist
 stamps/tests.cfg
+venv/
