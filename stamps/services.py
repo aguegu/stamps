@@ -170,7 +170,7 @@ class StampsService(BaseService):
     def create_shipping(self):
         """Create a new shipping object.
         """
-        return self.create("RateV14")
+        return self.create("RateV15")
 
     def get_address(self, address):
         """Get a shipping address.
