@@ -280,12 +280,12 @@ def suds_to_dict(d):
     out = {}
     for k, v in asdict(d).iteritems():
         if hasattr(v, '__keylist__'):
-            out[k] = recursive_asdict(v)
+            out[k] = suds_to_dict(v)
         elif isinstance(v, list):
             out[k] = []
             for item in v:
                 if hasattr(item, '__keylist__'):
-                    out[k].append(recursive_asdict(item))
+                    out[k].append(suds_to_dict(item))
                 else:
                     out[k].append(item)
         else:
@@ -295,4 +295,4 @@ def suds_to_dict(d):
 
 import json
 def suds_to_json(data):
-    return json.dumps(recursive_asdict(data))
+    return json.dumps(suds_to_dict(data))
