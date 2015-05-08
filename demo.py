@@ -3,6 +3,7 @@ import os
 
 from stamps.config import StampsConfiguration
 from stamps.services import StampsService
+
 logging.basicConfig()
 logging.getLogger("suds.client").setLevel(logging.ERROR)
 

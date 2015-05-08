@@ -277,21 +277,25 @@ class XDecimal(XBuiltin):
 
 def suds_to_dict(d):
     """Convert Suds object into serializable format."""
-    out = {}
-    for k, v in asdict(d).iteritems():
-        if hasattr(v, '__keylist__'):
-            out[k] = suds_to_dict(v)
-        elif isinstance(v, list):
-            out[k] = []
-            for item in v:
-                if hasattr(item, '__keylist__'):
-                    out[k].append(suds_to_dict(item))
-                else:
-                    out[k].append(item)
-        else:
-            out[k] = str(v) if isinstance(v, Decimal) else v
 
-    return out
+    if isinstance(d, list):
+        return [suds_to_dict(d2) for d2 in d]
+    else:
+        out = {}
+        for k, v in asdict(d).iteritems():
+            if hasattr(v, '__keylist__'):
+                out[k] = suds_to_dict(v)
+            elif isinstance(v, list):
+                out[k] = []
+                for item in v:
+                    if hasattr(item, '__keylist__'):
+                        out[k].append(suds_to_dict(item))
+                    else:
+                        out[k].append(item)
+            else:
+                out[k] = str(v) if isinstance(v, Decimal) else v
+
+        return out
 
 import json
 def suds_to_json(data):
