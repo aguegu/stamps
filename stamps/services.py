@@ -10,6 +10,7 @@
 """
 
 from decimal import Decimal
+from datetime import date
 from logging import getLogger
 from re import compile
 from suds import WebFault
@@ -292,8 +293,10 @@ def suds_to_dict(d):
                         out[k].append(suds_to_dict(item))
                     else:
                         out[k].append(item)
+            elif isinstance(v, Decimal) or isinstance(v, date):
+                out[k] = str(v) 
             else:
-                out[k] = str(v) if isinstance(v, Decimal) else v
+                out[k] = v
 
         return out
 
