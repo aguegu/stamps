@@ -300,6 +300,13 @@ def suds_to_dict(d):
 
         return out
 
+def dict_to_suds(sud, dct):
+    for k in sud:        
+        v = dct.get(k[0])
+        if v:
+            sud[k[0]] = v
+    return sud
+
 import json
 def suds_to_json(data):
     return json.dumps(suds_to_dict(data))
